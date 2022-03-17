@@ -3,12 +3,21 @@ import Figure from './Figure.js';
 import Circle from './Circle.js';
 import Rectangle from './Rectangle.js';
 //import Square from './Square.js';
+let htmlString = '';
 
 const form = {
     changeSelect(e) {
-        console.log(e);
-        //let htmlString = '<label>' + e. + '<input id="' + YOUR INPUT ID + '" type="number"></label>'
-
+        htmlString = '';
+        let chosenFigure = document.getElementById("select").value;
+        console.log(chosenFigure);
+        if(chosenFigure == 'circle'){
+            form.inputElementsWithLabel('Radius', 'radius');
+        }else if(chosenFigure == 'rectangle'){
+            form.inputElementsWithLabel('Width', 'width');
+            form.inputElementsWithLabel('Height', 'height');
+        }else if(chosenFigure == 'square'){
+            form.inputElementsWithLabel('Size', 'size');
+        }
     },
     init() {
         console.log('Form init!');
@@ -16,7 +25,8 @@ const form = {
         document.getElementById('form').addEventListener('submit', this.submitForm);
     },
     inputElementsWithLabel(label, id) {
-
+        htmlString += '<label>' + label + '<input id="' + id + '" type="number"></label>';
+        document.getElementById('otherInputs').innerHTML = htmlString;
     },
     submitForm(e) {
 
